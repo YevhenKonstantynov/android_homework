@@ -1,21 +1,11 @@
 package com.example.freeapitext;
 
-import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.freeapitext.databinding.ActivityMain2Binding;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,35 +18,33 @@ public class MainActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main2);
 
-        String currency = (String) getIntent().getExtras().get("currency");
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        String city = (String) getIntent().getExtras().get("city");
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.0x.org")
+                .baseUrl("https://api.openweathermap.org")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        CryptoPrice cryptoPrice;
-        cryptoPrice = retrofit.create(CryptoPrice.class);
-        cryptoPrice.getCryptoPrice(currency, "TUSD", "1000").
-                enqueue(new Callback<Example>() {
+        WeatherWeekService weather;
+        weather = retrofit.create(WeatherWeekService.class);
+        weather.message(city, "3d822b9dce4e57f12b9b3400d480a358").
+                enqueue(new Callback<WeekWeather>() {
                     @Override
-                    public void onResponse(Call<Example> call, Response<Example> response) {
+                    public void onResponse(Call<WeekWeather> call, Response<WeekWeather> response) {
                         if (response.isSuccessful()) {
-                            final TextView priceElem = findViewById(R.id.price);
-                            final TextView buyTokenAddressElem = findViewById(R.id.buyTokenAddress);
-
-                            priceElem.setText("Цена в долларах: " + response.body().getPrice());
-                            buyTokenAddressElem.setText("Адрес покупки токена: " + response.body().getBuyTokenAddress());
-                        } else Log.i("crypto", "no response");
+                            MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(getApplicationContext(), response.body().getList());
+                            recyclerView.setAdapter(adapter);
+                        } else Log.i("weather", "no response");
                     }
 
                     @Override
-                    public void onFailure(Call<Example> call, Throwable t) {
-                        Log.i("crypto", "Failure " + t);
+                    public void onFailure(Call<WeekWeather> call, Throwable t) {
+                        Log.i("weather", "Failure " + t);
                     }
                 });
-
     }
 }
