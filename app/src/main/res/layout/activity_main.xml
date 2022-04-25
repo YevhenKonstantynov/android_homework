@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,16 +12,16 @@
         android:layout_marginTop="200dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Введите город" />
+        android:text="Введите криптовалюту" />
     <EditText
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:id="@+id/city">
+        android:id="@+id/currency">
     </EditText>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/fetch"
-        android:text="Узнать погоду">
+        android:text="Узнать цену">
     </Button>
 </androidx.appcompat.widget.LinearLayoutCompat>
