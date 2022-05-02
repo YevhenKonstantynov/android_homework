@@ -1,9 +1,8 @@
 package com.example.freeapitext;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+import java.util.HashMap;
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,36 +12,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "tokenAddressPath",
-        "router"
+        "lat",
+        "lon"
 })
-public class FillData {
+public class Coord {
 
-    @JsonProperty("tokenAddressPath")
-    private List<String> tokenAddressPath = null;
-    @JsonProperty("router")
-    private String router;
+    @JsonProperty("lat")
+    private Double lat;
+    @JsonProperty("lon")
+    private Double lon;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("tokenAddressPath")
-    public List<String> getTokenAddressPath() {
-        return tokenAddressPath;
+    @JsonProperty("lat")
+    public Double getLat() {
+        return lat;
     }
 
-    @JsonProperty("tokenAddressPath")
-    public void setTokenAddressPath(List<String> tokenAddressPath) {
-        this.tokenAddressPath = tokenAddressPath;
+    @JsonProperty("lat")
+    public void setLat(Double lat) {
+        this.lat = lat;
     }
 
-    @JsonProperty("router")
-    public String getRouter() {
-        return router;
+    @JsonProperty("lon")
+    public Double getLon() {
+        return lon;
     }
 
-    @JsonProperty("router")
-    public void setRouter(String router) {
-        this.router = router;
+    @JsonProperty("lon")
+    public void setLon(Double lon) {
+        this.lon = lon;
     }
 
     @JsonAnyGetter

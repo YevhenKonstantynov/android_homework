@@ -2,7 +2,6 @@ package com.example.freeapitext;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,36 +11,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "name",
-        "proportion"
+        "all"
 })
-public class Source {
+public class Clouds {
 
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("proportion")
-    private String proportion;
+    @JsonProperty("all")
+    private Float all;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("all")
+    public Float getAll() {
+        return all;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonProperty("proportion")
-    public String getProportion() {
-        return proportion;
-    }
-
-    @JsonProperty("proportion")
-    public void setProportion(String proportion) {
-        this.proportion = proportion;
+    @JsonProperty("all")
+    public void setAll(Float all) {
+        this.all = all;
     }
 
     @JsonAnyGetter

@@ -13,11 +13,11 @@ import java.util.Date;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
-    private java.util.List<Source> mData;
+    private java.util.List<List> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    MyRecyclerViewAdapter(Context context, java.util.List<Source> data) {
+    MyRecyclerViewAdapter(Context context, java.util.List<List> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -30,8 +30,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Source l = mData.get(position);
-        holder.name.setText("Source: " + l.getName());
+        List l = mData.get(position);
+        String date = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date((long)l.getDt() * 1000));
+        holder.myData.setText("Date: " + date);
+        holder.myTextWind.setText("Wind: " + l.getWind().getSpeed().toString());
+        holder.myTextTemp.setText("Temp: " + Double.valueOf(l.getMain().getTemp() - 273).toString());
+        holder.myPressure.setText("Pressure: " + l.getMain().getPressure().toString());
     }
 
     @Override
@@ -40,11 +44,17 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        EditText name;
+        EditText myTextWind;
+        EditText myTextTemp;
+        EditText myData;
+        EditText myPressure;
 
         ViewHolder(View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.name);
+            myPressure = itemView.findViewById(R.id.pressure);
+            myTextWind = itemView.findViewById(R.id.wind);
+            myTextTemp = itemView.findViewById(R.id.temp);
+            myData = itemView.findViewById(R.id.date);
             itemView.setOnClickListener(this);
         }
 
@@ -54,7 +64,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         }
     }
 
-    Source getItem(int id) {
+    List getItem(int id) {
         return mData.get(id);
     }
 

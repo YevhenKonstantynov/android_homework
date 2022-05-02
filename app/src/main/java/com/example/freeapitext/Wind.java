@@ -2,7 +2,6 @@ package com.example.freeapitext;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,36 +11,49 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "name",
-        "proportion"
+        "speed",
+        "deg",
+        "gust"
 })
-public class Source {
+public class Wind {
 
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("proportion")
-    private String proportion;
+    @JsonProperty("speed")
+    private Double speed;
+    @JsonProperty("deg")
+    private Integer deg;
+    @JsonProperty("gust")
+    private Double gust;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("speed")
+    public Double getSpeed() {
+        return speed;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
+    @JsonProperty("speed")
+    public void setSpeed(Double speed) {
+        this.speed = speed;
     }
 
-    @JsonProperty("proportion")
-    public String getProportion() {
-        return proportion;
+    @JsonProperty("deg")
+    public Integer getDeg() {
+        return deg;
     }
 
-    @JsonProperty("proportion")
-    public void setProportion(String proportion) {
-        this.proportion = proportion;
+    @JsonProperty("deg")
+    public void setDeg(Integer deg) {
+        this.deg = deg;
+    }
+
+    @JsonProperty("gust")
+    public Double getGust() {
+        return gust;
+    }
+
+    @JsonProperty("gust")
+    public void setGust(Double gust) {
+        this.gust = gust;
     }
 
     @JsonAnyGetter

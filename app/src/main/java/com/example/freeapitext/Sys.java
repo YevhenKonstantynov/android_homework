@@ -2,7 +2,6 @@ package com.example.freeapitext;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,36 +11,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "name",
-        "proportion"
+        "pod"
 })
-public class Source {
+public class Sys {
 
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("proportion")
-    private String proportion;
+    @JsonProperty("pod")
+    private String pod;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("pod")
+    public String getPod() {
+        return pod;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonProperty("proportion")
-    public String getProportion() {
-        return proportion;
-    }
-
-    @JsonProperty("proportion")
-    public void setProportion(String proportion) {
-        this.proportion = proportion;
+    @JsonProperty("pod")
+    public void setPod(String pod) {
+        this.pod = pod;
     }
 
     @JsonAnyGetter
